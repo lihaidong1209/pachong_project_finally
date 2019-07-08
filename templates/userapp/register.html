@@ -1,0 +1,305 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- font files  -->
+<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+<!-- /font files  -->
+<!-- css files -->
+<link href="../../static/css/style.css" rel='stylesheet' type='text/css' media="all" />
+<!-- /css files -->
+    <script>
+            {#验证用户名        #}
+        function isName(aa) {
+                var name = document.getElementById('txt_name');
+                var i = name.value;
+                var aaa = document.getElementById('mg1');
+                aaa.src = "{% static 'images/5-121204193R5-50.gif' %}";
+                var url = "{% url 'userapp:name' %}?name=" + i;
+                var a;
+                if (window.ActiveXObject) {
+                    a = new ActiveXObject("Microsoft.XMLHTTP")
+                } else if (window.XMLHttpRequest) {
+                    a = new XMLHttpRequest()
+                }
+                a.open("get", url, true);
+                a.send();
+                a.onreadystatechange = function () {
+                    if (a.readyState == 4 && a.status == 200) {
+                        result = a.responseText;
+                        console.log(result);
+                        if (result == '正确') {
+                            aaa.src = "{% static 'images/right_3.jpg' %}";
+                            document.getElementById('ggg').innerHTML = "<font color='green' size='2px'>用户名格式正确^_^！</font>";
+                        } else if (result == '空') {
+                            aaa.src = "{% static 'images/error_3.jpg' %}";
+                            document.getElementById('ggg').innerHTML = "<font color='red' size='2px'>用户名不能以数字开头！</font>";
+                        }
+                    }
+                    }
+                }
+        {#手机号验证#}
+        function isPhone(aa) {
+                var email = document.getElementById('txt_username');
+                var i = email.value;
+                var aaa = document.getElementById('mg');
+                aaa.src = "{% static 'images/5-121204193R5-50.gif' %}";
+                var url = "{% url 'userapp:isPhone' %}?phone=" + i;
+                var a;
+                if (window.ActiveXObject) {
+                    a = new ActiveXObject("Microsoft.XMLHTTP")
+                } else if (window.XMLHttpRequest) {
+                    a = new XMLHttpRequest()
+                }
+                a.open("get", url, true);
+                a.send();
+                a.onreadystatechange = function () {
+                    if (a.readyState == 4 && a.status == 200) {
+                        result = a.responseText;
+                        if (result == '正确') {
+                            aaa.src = "{% static 'images/right_3.jpg' %}";
+                            document.getElementById('J_tipUsername').innerHTML = "<font color='green' size='2px'>s手机格式正确^_^！</font>";
+                        } else if (result == '空') {
+                            aaa.src = "{% static 'images/error_3.jpg' %}";
+                            document.getElementById('J_tipUsername').innerHTML = "<font color='red' size='2px'>手机号不能为空！</font>";
+                        }else{
+                            aaa.src = "{% static 'images/error_3.jpg' %}";
+                            document.getElementById('J_tipUsername').innerHTML = "<font color='red' size='2px'>手机格式有误！</font>";
+                        }
+                    }
+                    }
+                }
+        {#邮箱验证#}
+        function isEmail(aa) {
+                var email = document.getElementById('email');
+                var i = email.value;
+                var aaa = document.getElementById('em');
+                aaa.src = "{% static 'images/5-121204193R5-50.gif' %}";
+                var url = "{% url 'userapp:isEmail' %}?email=" + i;
+                var a;
+                if (window.ActiveXObject) {
+                    a = new ActiveXObject("Microsoft.XMLHTTP")
+                } else if (window.XMLHttpRequest) {
+                    a = new XMLHttpRequest()
+                }
+                a.open("get", url, true);
+                a.send();
+                a.onreadystatechange = function () {
+                    if (a.readyState == 4 && a.status == 200) {
+                        result = a.responseText;
+                        console.log('result=' + result);
+                        {#msg = document.getElementById("msg");#}
+                        {#msg.innerHTML = result;#}
+                        if (result == '正确') {
+                            aaa.src = "{% static 'images/right_3.jpg' %}";
+                            document.getElementById('email_info').innerHTML = "<font color='green' size='2px'>邮箱格式正确^_^！</font>";
+                        } else if (result == '空') {
+                            aaa.src = "{% static 'images/error_3.jpg' %}";
+                            document.getElementById('email_info').innerHTML = "<font color='red' size='2px'>邮箱不能为空！</font>";
+                        }else{
+                            aaa.src = "{% static 'images/error_3.jpg' %}";
+                            document.getElementById('email_info').innerHTML = "<font color='red' size='2px'>邮箱格式有误！</font>";
+                        }
+                    }
+                    }
+                }
+        {#验证密码,使用get请求#}
+        {#function pwd(aa) {#}
+        {#            var pwd1 = document.getElementById('txt_password');#}
+        {#            var i = pwd1.value;#}
+        {#            var aaa = document.getElementById('pwd1');#}
+        {#            aaa.src = "{% static 'images/5-121204193R5-50.gif' %}";#}
+        {#            var url = "{% url 'userapp:pwd' %}?pwd1=" + i;#}
+        {#            var a;#}
+        {#            if (window.ActiveXObject) {#}
+        {#                a = new ActiveXObject("Microsoft.XMLHTTP")#}
+        {#            } else if (window.XMLHttpRequest) {#}
+        {#                a = new XMLHttpRequest()#}
+        {#            }#}
+        {#            a.open("get", url, true);#}
+        {#            a.send();#}
+        {#            a.onreadystatechange = function () {#}
+        {#                if (a.readyState == 4 && a.status == 200) {#}
+        {#                    result = a.responseText;#}
+        {#                    console.log('result=' + result);#}
+        {#                    msg = document.getElementById("msg");#}
+        {#                    msg.innerHTML = result;#}
+        {#                    if (result == '正确') {#}
+        {#                        aaa.src = "{% static 'images/right_3.jpg' %}";#}
+        {#                        document.getElementById('J_tipPassword').innerHTML = "<font  color='green' size='2px'>密码正确了哦^_^</font>";#}
+        {#                    }else if (result == '空') {#}
+        {#                        aaa.src = "{% static 'images/error_3.jpg' %}";#}
+        {#                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码不能为空哦</font>";#}
+        {#                    }else if (result == '长度') {#}
+        {#                         aaa.src = "{% static 'images/error_3.jpg' %}";#}
+        {#                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码长度需要在6~20位之间</font>";#}
+        {#                    }else {#}
+        {#                        aaa.src = "{% static 'images/error_3.jpg' %}";#}
+        {#                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码格式有误</font>";#}
+        {#                    }#}
+        {#                }#}
+        {#                }#}
+        {#            }#}
+        {#验证密码 使用post请求            #}
+        function pwd() {
+            var pwd1 = document.getElementById('txt_password').value;
+            var url = "{% url 'userapp:pwd' %}";
+            var aaa = document.getElementById('pwd1');
+            aaa.src = "{% static 'images/5-121204193R5-50.gif' %}";
+            var bb;
+            if (window.ActiveXObject){
+                bb = new ActiveXObject("Microsoft.XMLHTTP")
+            }else if (window.XMLHttpRequest){
+                bb = new XMLHttpRequest()
+            }
+            bb.open("post",url,true);
+            bb.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            bb.setRequestHeader("X-csrftoken","{{ csrf_token }}");
+            bb.send("pwd1="+pwd1);
+            bb.onreadystatechange=function () {
+                if (bb.readyState == 4 && bb.status == 200){
+                    result = bb.responseText;
+                    {#console.log('result=' + result);#}
+                    if (result == '正确') {
+                        aaa.src = "{% static 'images/right_3.jpg' %}";
+                        document.getElementById('J_tipPassword').innerHTML = "<font  color='green' size='2px'>密码正确了哦^_^</font>";
+                    }else if (result == '空') {
+                        aaa.src = "{% static 'images/error_3.jpg' %}";
+                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码不能为空哦</font>";
+                    }else if (result == '长度') {
+                         aaa.src = "{% static 'images/error_3.jpg' %}";
+                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码长度需要在6~20位之间</font>";
+                    }else {
+                        aaa.src = "{% static 'images/error_3.jpg' %}";
+                        document.getElementById('J_tipPassword').innerHTML = "<font color='red' size='2px'>密码格式有误</font>";
+                    }
+                }
+            }
+        }
+         {#发送短信验证码#}
+        function isButton(aa) {
+                var phone = document.getElementById('txt_username').value;
+                var url = "{% url 'userapp:message' %}?check_code=" + 1+'&phone='+phone;
+                var a;
+                if (window.ActiveXObject) {
+                    a = new ActiveXObject("Microsoft.XMLHTTP")
+                } else if (window.XMLHttpRequest) {
+                    a = new XMLHttpRequest()
+                }
+                a.open("get", url, true);
+                a.send();
+                a.onreadystatechange = function () {
+                    if (a.readyState == 4 && a.status == 200) {
+                        result = a.responseText;
+                        console.log('result=' + result);
+                        {#msg = document.getElementById("msg");#}
+                        {#msg.innerHTML = result;#}
+                        if (result == '验证码已发送') {
+                            {#aaa.src = "{% static 'images/right_3.jpg' %}";#}
+                            document.getElementById('button').innerHTML = "<font color='green' size='3px'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;验证码已发送</font>";
+                        }
+                    }
+                    }
+                }
+        {#检测验证码#}
+        function checkcode(aa) {
+            var check = document.getElementById('check_code').value;
+            var url = "{% url 'userapp:checkcode' %}?check=" + check;
+            var bbb = document.getElementById('check1');
+            bbb.src = "{% static 'images/5-121204193R5-50.gif' %}";
+            var b;
+            if (window.ActiveXObject) {
+                b = new ActiveXObject("Microsoft.XMLHTTP")
+            } else if (window.XMLHttpRequest) {
+                b = new XMLHttpRequest()
+            }
+            b.open("get", url, true);
+            b.send();
+            b.onreadystatechange = function () {
+                if (b.readyState == 4 && b.status == 200) {
+                    result = b.responseText;
+                    {#console.log('result=' + result);#}
+                    {#pwd2 = document.getElementById("pwd2");#}
+                    {#pwd2.innerHTML = result#}
+                    if (result == '不相同') {
+                        bbb.src =
+                        "{% static 'images/error_3.jpg' %}"
+                    } else {
+                        bbb.src =
+                        "{% static 'images/right_3.jpg' %}"
+                    }
+                }
+            }
+
+        }
+        {#点击注册时如果有错误页面不跳转并报相应地方的错误#}
+        function register() {
+                var name = document.getElementById('txt_name').value;
+                var phone = document.getElementById('txt_username').value;
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('txt_password').value;
+                var check = document.getElementById('check_code').value;
+                var url = '{% url 'userapp:registerlogic' %}?email='+email+'&name='+name+'&password='+password+'&phone='+phone+'check='+check;
+                var a;
+                if (window.ActiveXObject) {
+                    a = new ActiveXObject("Microsoft.XMLHTTP")
+                } else if (window.XMLHttpRequest) {
+                    a = new XMLHttpRequest()
+                }
+                a.open("get", url, true);
+                a.send();
+                a.onreadystatechange = function () {
+                    if (a.readyState == 4 && a.status == 200) {
+                        result = a.responseText;
+                        console.log('result=' + result);
+                        if (result == '邮箱格式有误') {
+                            document.getElementById('email_info').innerHTML = "<font color='yellow' size='2px'>警告！邮箱格式有误</font>";
+                        }else if (result == '请检查上述信息是否符合规定'){
+                            document.getElementById('aaa').innerHTML = "<font color='yellow' size='2px'>警告！用户名或手机号或密码格式有误</font>";
+                        }
+                    }
+                    }
+                }
+    </script>
+</head>
+<body>
+<h1>Register</h1>
+<div class="log">
+	<div class="content2">
+		<h2>Register</h2>
+		<form action="{% url 'userapp:registerlogic' %}" method="post" enctype="application/x-www-form-urlencoded">
+            {% csrf_token %}
+			<input type="text" name="name" value="弟弟，输入你的狗名ing" style="font-size: 3px" id="txt_name" onblur="isName()" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'NAME AND SURNAME';}">
+			<img src="" id="mg1" width="20px">
+            <div id="ggg" class="cue" style="color: #999999"></div>
+            <input type="tel" name="phone" id="txt_username" style="font-size: 3px" value="请输入手机号码" onblur="isPhone()" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'PHONE';}">
+			<img src="" id="mg" width="20px">
+            <div id="J_tipUsername" class="cue" style="color: #999999"></div>
+            <input type="email" name="email" id="email" style="font-size: 3px" value="请输入有效的邮箱" onblur="isEmail()" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL ADDRESS';}">
+			<img src="" id="em" width="20px">
+            <div id="email_info" class="cue" style="color: #999999"></div>
+            <input type="password" name="password" placeholder="请输入8-20位字母及符号" onblur="pwd()" style="font-size: 3px" id="txt_password"  onfocus="this.value = '';">
+			<img src="" id="pwd1" width="20px">
+            <div id="J_tipPassword" class="icon_yes" style="color: #999999"></div>
+            <input type="text" name="txt_vcode" id="check_code" placeholder="请输入手机验证码" onblur="checkcode()" style="width:300px; font-size: 3px; text-align: left " >
+            <img src="" id="check1" width="20px">
+{#            <div id="email_info" class="cue" style="color: #999999"></div>#}
+            <a type="button" name="button" id="button" href="javascript:void(0)" onclick="isButton()"  style="width: 175px;height: 35px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击获取验证码</a>
+            <br>
+            <div id="aaa"></div>
+            <input type="submit" class="register" value="立即注册" >
+		</form>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="footer">
+	<p>Copyright &copy;  <a href="http://www.baizhiedu.com/" target="_blank" title="百知教育">百知教育</a></p>
+</div>
+</body>
+</html>

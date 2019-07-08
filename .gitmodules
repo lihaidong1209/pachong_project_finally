@@ -1,0 +1,3 @@
+[submodule "userapp/pachong_project"]
+	path = userapp/pachong_project
+	url = git@github.com:lihaidong1209/pachong_project.git
